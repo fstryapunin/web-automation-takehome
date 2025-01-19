@@ -1,0 +1,12 @@
+{
+  "name": "web-automation-takehome",
+  "version": "1.0.0",
+  "description": "Takehome assignment for apify",
+  "main": "main.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node --experimental-strip-types --experimental-transform-types main.ts"
+  },
+  "author": "Fedor Strjapunin",
+  "license": "ISC"
+}
