@@ -30,6 +30,7 @@ const EqualDistributionWindowSizeCalculator: PriceWindowSizeCalculator = (
     (Configuration.PRODUCT_MAX_PRICE - Configuration.PRODUCT_MIN_PRICE);
   return (
     (Configuration.MAX_PRODUCTS_RETURNED_PER_REQUEST / density) *
+    0.95 *
     Math.pow(Configuration.RETRY_COEFICIENT, retries)
   );
 };
