@@ -8,7 +8,7 @@ export class EcommerceApiClient {
   }
 
   // This method should be moved to a base class if multiple Api clients are used in the solution.
-  private async request(url: string, requestInit?: RequestInit) {
+  private async request(url: URL | string, requestInit?: RequestInit) {
     const response = await fetch(url, requestInit);
 
     if (!response.ok) {
@@ -33,7 +33,7 @@ export class EcommerceApiClient {
       requestUrl.searchParams.append("maxPrice", request.maxPrice.toString());
     }
 
-    const response = await fetch(requestUrl, requestInit);
+    const response = await this.request(requestUrl, requestInit);
 
     return await response.json();
   }
