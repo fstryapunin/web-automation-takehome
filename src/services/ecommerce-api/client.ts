@@ -2,7 +2,7 @@ import { Configuration } from "../../configuration/configuration.ts";
 import type { ProductRequest, ProductResponse } from "./models.ts";
 
 export class EcommerceApiClient {
-  private readonly _baseUrl = Configuration.ecommerceApiBaseUrl;
+  private readonly _baseUrl = Configuration.ECOMMERCE_API_BASE_URL;
 
   // This method should be moved to a base class if multiple Api clients are used in the solution.
   private async request(url: URL | string, requestInit?: RequestInit) {

@@ -27,11 +27,10 @@ const EqualDistributionWindowSizeCalculator: PriceWindowSizeCalculator = (
 ) => {
   const density =
     totalProductCount /
-    (Configuration.ecommerceProductMaxPrice -
-      Configuration.ecommerceProductMinPrice);
+    (Configuration.PRODUCT_MAX_PRICE - Configuration.PRODUCT_MIN_PRICE);
   return (
-    (Configuration.ecommerceMaxProductsReturned / density) *
-    Math.pow(Configuration.retryCoeficient, retries)
+    (Configuration.MAX_PRODUCTS_RETURNED_PER_REQUEST / density) *
+    Math.pow(Configuration.RETRY_COEFICIENT, retries)
   );
 };
 

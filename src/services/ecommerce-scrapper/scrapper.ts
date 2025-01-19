@@ -10,8 +10,8 @@ export class EcommerceScrapper {
   private readonly _apiClient = new EcommerceApiClient();
   private async getTotalProductCount() {
     const response = await this._apiClient.getProducts({
-      minPrice: Configuration.ecommerceProductMinPrice,
-      maxPrice: Configuration.ecommerceProductMaxPrice,
+      minPrice: Configuration.PRODUCT_MIN_PRICE,
+      maxPrice: Configuration.PRODUCT_MAX_PRICE,
     });
     return response.total;
   }
@@ -25,7 +25,7 @@ export class EcommerceScrapper {
     let retries = 0;
 
     while (
-      leftPriceBound < Configuration.ecommerceProductMaxPrice &&
+      leftPriceBound < Configuration.PRODUCT_MAX_PRICE &&
       products.length < totalProductCount
     ) {
       const rightPriceBound =
@@ -37,7 +37,9 @@ export class EcommerceScrapper {
         maxPrice: rightPriceBound,
       });
 
-      if (nextProductBatch.total > Configuration.ecommerceMaxProductsReturned) {
+      if (
+        nextProductBatch.total > Configuration.MAX_PRODUCTS_RETURNED_PER_REQUEST
+      ) {
         retries++;
         continue;
       }

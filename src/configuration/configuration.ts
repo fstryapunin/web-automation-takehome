@@ -1,30 +1,14 @@
-export class Configuration {
-  static readonly ecommerceApiBaseUrl = process.env
-    .ECOMMERCE_API_BASE_URL as string;
-  static readonly ecommerceProductMaxPrice = parseInt(
-    process.env.PRODUCT_MAX_PRICE ?? ""
-  );
-  static readonly ecommerceProductMinPrice = parseInt(
-    process.env.PRODUCT_MIN_PRICE ?? ""
-  );
-  static readonly ecommerceMaxProductsReturned = parseInt(
-    process.env.MAX_PRODUCTS_RETURNED ?? ""
-  );
-  static readonly retryCoeficient = parseInt(
-    process.env.RETRY_COEFICIENT ?? ""
-  );
+import { z } from "zod";
 
-  static validateConfiguration() {
-    const uninitializedValues = Object.keys(this).filter(
-      (key) => this[key] === undefined || isNaN(this[key])
-    );
+const configurationSchema = z.object({
+  ECOMMERCE_API_BASE_URL: z.string().url(),
+  PRODUCT_MIN_PRICE: z.coerce.number().nonnegative(),
+  PRODUCT_MAX_PRICE: z.coerce.number().positive(),
+  MAX_PRODUCTS_RETURNED_PER_REQUEST: z.coerce.number().positive(),
+  RETRY_COEFICIENT: z.coerce
+    .number()
+    .min(0, "Please provide number between 0 and 1")
+    .max(1, "Please provide number between 0 and 1"),
+});
 
-    if (uninitializedValues.length > 0) {
-      throw new Error(
-        `Missing configuration values: ${uninitializedValues.join(", ")}.`
-      );
-    }
-
-    console.log("Validated configuration.");
-  }
-}
+export const Configuration = configurationSchema.parse(process.env);
