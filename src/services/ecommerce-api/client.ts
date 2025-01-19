@@ -17,16 +17,16 @@ export class EcommerceApiClient {
   }
 
   public async getProducts(
-    request: ProductRequest,
+    request?: ProductRequest,
     requestInit?: RequestInit
   ): Promise<ProductResponse> {
     const requestUrl = new URL("/products", this._baseUrl);
 
-    if (request.minPrice) {
+    if (request?.minPrice) {
       requestUrl.searchParams.append("minPrice", request.minPrice.toString());
     }
 
-    if (request.maxPrice) {
+    if (request?.maxPrice) {
       requestUrl.searchParams.append("maxPrice", request.maxPrice.toString());
     }
 
