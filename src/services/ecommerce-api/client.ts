@@ -1,11 +1,8 @@
+import { Configuration } from "../../configuration/configuration";
 import { ProductRequest, ProductResponse } from "./models";
 
 export class EcommerceApiClient {
-  private readonly _baseUrl: string;
-
-  constructor(baseUrl: string) {
-    this._baseUrl = baseUrl;
-  }
+  private readonly _baseUrl = Configuration.ecommerceApiBaseUrl;
 
   // This method should be moved to a base class if multiple Api clients are used in the solution.
   private async request(url: URL | string, requestInit?: RequestInit) {
