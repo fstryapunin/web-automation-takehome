@@ -8,5 +8,8 @@
     "start": "node --experimental-strip-types --experimental-transform-types main.ts"
   },
   "author": "Fedor Strjapunin",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^22.10.7"
+  }
 }
