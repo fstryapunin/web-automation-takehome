@@ -1,4 +1,4 @@
-class Configuration {
+export class Configuration {
   static readonly ecommerceApiBaseUrl = process.env.ECOMMERCE_API_BASE_URL;
   static validateConfiguration() {
     const uninitializedValues = Object.keys(this).filter(
