@@ -3,9 +3,10 @@
   "version": "1.0.0",
   "description": "Takehome assignment for apify",
   "main": "main.ts",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node --experimental-strip-types --experimental-transform-types main.ts"
+    "start": "node --experimental-strip-types --experimental-transform-types src/main.ts"
   },
   "author": "Fedor Strjapunin",
   "license": "ISC",
