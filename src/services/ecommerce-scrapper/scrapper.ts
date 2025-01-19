@@ -1,0 +1,54 @@
+import { Configuration } from "../../configuration/configuration";
+import { EcommerceApiClient } from "../ecommerce-api/client";
+import { Product } from "../ecommerce-api/models";
+import {
+  ExpectedPriceDistribution,
+  WindowSizeCalculatorByDistributionType,
+} from "./utils";
+
+export class EcommerceScrapper {
+  private readonly _apiClient = new EcommerceApiClient();
+  private async getTotalProductCount() {
+    const response = await this._apiClient.getProducts({
+      minPrice: Configuration.ecommerceProductMinPrice,
+      maxPrice: Configuration.ecommerceProductMaxPrice,
+    });
+    return response.total;
+  }
+  public async scrapeProducts(priceDistribution: ExpectedPriceDistribution) {
+    const totalProductCount = await this.getTotalProductCount();
+    const calculatePriceWindowSize =
+      WindowSizeCalculatorByDistributionType[priceDistribution];
+
+    const products: Product[] = [];
+    let leftPriceBound = 0;
+    let retries = 0;
+
+    while (
+      leftPriceBound < Configuration.ecommerceProductMaxPrice &&
+      products.length < totalProductCount
+    ) {
+      const rightPriceBound =
+        leftPriceBound +
+        calculatePriceWindowSize(totalProductCount, leftPriceBound, retries);
+
+      const nextProductBatch = await this._apiClient.getProducts({
+        minPrice: leftPriceBound,
+        maxPrice: rightPriceBound,
+      });
+
+      if (nextProductBatch.total > Configuration.ecommerceMaxProductsReturned) {
+        retries++;
+        continue;
+      }
+
+      leftPriceBound = leftPriceBound + rightPriceBound;
+      products.concat(nextProductBatch.products);
+      console.log(
+        `Succesfully scrapped ${products.length} out of ${totalProductCount}`
+      );
+    }
+
+    return products;
+  }
+}
