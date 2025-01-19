@@ -1,5 +1,5 @@
-import { Configuration } from "../../configuration/configuration";
-import { ProductRequest, ProductResponse } from "./models";
+import { Configuration } from "../../configuration/configuration.ts";
+import type { ProductRequest, ProductResponse } from "./models.ts";
 
 export class EcommerceApiClient {
   private readonly _baseUrl = Configuration.ecommerceApiBaseUrl;

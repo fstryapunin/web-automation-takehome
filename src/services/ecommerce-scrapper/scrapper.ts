@@ -1,10 +1,10 @@
-import { Configuration } from "../../configuration/configuration";
-import { EcommerceApiClient } from "../ecommerce-api/client";
-import { Product } from "../ecommerce-api/models";
+import { Configuration } from "../../configuration/configuration.ts";
+import { EcommerceApiClient } from "../ecommerce-api/client.ts";
+import type { Product } from "../ecommerce-api/models.ts";
 import {
   ExpectedPriceDistribution,
   WindowSizeCalculatorByDistributionType,
-} from "./utils";
+} from "./utils.ts";
 
 export class EcommerceScrapper {
   private readonly _apiClient = new EcommerceApiClient();

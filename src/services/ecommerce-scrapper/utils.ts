@@ -1,4 +1,4 @@
-import { Configuration } from "../../configuration/configuration";
+import { Configuration } from "../../configuration/configuration.ts";
 
 export enum ExpectedPriceDistribution {
   Equal = "Equal",
