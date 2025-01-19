@@ -8,6 +8,7 @@ import {
 
 export class EcommerceScrapper {
   private readonly _apiClient = new EcommerceApiClient();
+
   private async getTotalProductCount() {
     const response = await this._apiClient.getProducts({
       minPrice: Configuration.PRODUCT_MIN_PRICE,
@@ -15,6 +16,7 @@ export class EcommerceScrapper {
     });
     return response.total;
   }
+
   public async scrapeProducts(priceDistribution: ExpectedPriceDistribution) {
     const totalProductCount = await this.getTotalProductCount();
     const calculatePriceWindowSize =
