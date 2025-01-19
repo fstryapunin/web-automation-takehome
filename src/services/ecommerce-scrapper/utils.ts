@@ -8,7 +8,7 @@ export enum ExpectedPriceDistribution {
 export type ExpectedPriceDistributionType = `${ExpectedPriceDistribution}`;
 
 /**
- * Function interface that returns the expected right bound of a pricing window containing a maximum of 1000 products.
+ * Function interface that returns the expected size of a pricing window containing a maximum of 1000 products.
  * Returns smaller windows for successive retries.
  * Implementation may differ for different expected product price distributions.
  * Position is the current left bound of the pricing window.
